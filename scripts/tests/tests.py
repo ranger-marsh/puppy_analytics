@@ -30,46 +30,20 @@ def test_file_open():
     assert puppy_list[8] == ['Puppy 9', '15.9', '16.1', '18', '19.95', '21.25', '22.1', '22.1', '24.25', '26.4']
 
 
-def test_one_day():
+def test_check_data():
     short = ['Puppy 1', '14']
+    enough = ['Puppy 1', '14', '15']
+    assert A.check_data(short) == False
+    assert A.check_data(enough) == True
+
+
+def daily_weight_gains():
     puppy1 = ['Puppy 1', '14', '14.9', '15.2', '15.85', '17.55', '19.95', '20.5', '22.6', '24.05']
     puppy9 = ['Puppy 9', '15.9', '16.1', '18', '19.95', '21.25', '22.1', '22.1', '24.25', '26.4']
-    assert A.one_day(short) == None
-    assert A.one_day(puppy1) == 1.45
-    assert A.one_day(puppy9) == 2.15
+    assert A.daily_weight_gains(puppy1) == [.9, .3, .65, 1.7, 2.4, .55, 2.1, 1.45]
+    assert A.daily_weight_gains(puppy9) == [.2, 1.9, 1.95, 1.3, .85, 0, 2.15, 2.15]
 
 
-def test_two_day():
-    short = ['Puppy 1', '14', '14.9']
-    puppy1 = ['Puppy 1', '14', '14.9', '15.2', '15.85', '17.55', '19.95', '20.5', '22.6', '24.05']
-    puppy9 = ['Puppy 9', '15.9', '16.1', '18', '19.95', '21.25', '22.1', '22.1', '24.25', '26.4']
-    assert A.two_day(short) == None
-    assert A.two_day(puppy1) == 3.55
-    assert A.two_day(puppy9) == 4.3
-
-
-def test_three_day():
-    short = ['Puppy 1', '14', '14.9', '15.2']
-    puppy1 = ['Puppy 1', '14', '14.9', '15.2', '15.85', '17.55', '19.95', '20.5', '22.6', '24.05']
-    puppy9 = ['Puppy 9', '15.9', '16.1', '18', '19.95', '21.25', '22.1', '22.1', '24.25', '26.4']
-    assert A.three_day(short) == None
-    assert A.three_day(puppy1) == 4.1
-    assert A.three_day(puppy9) == 4.3
-
-
-def test_four_day():
-    short = ['Puppy 1', '14', '14.9', '15.2', '15.85']
-    puppy1 = ['Puppy 1', '14', '14.9', '15.2', '15.85', '17.55', '19.95', '20.5', '22.6', '24.05']
-    puppy9 = ['Puppy 9', '15.9', '16.1', '18', '19.95', '21.25', '22.1', '22.1', '24.25', '26.4']
-    assert A.four_day(short) == None
-    assert A.four_day(puppy1) == 6.5
-    assert A.four_day(puppy9) == 5.15
-
-
-def test_four_five():
-    short = ['Puppy 1', '14', '14.9', '15.2', '15.85', '17.55']
-    puppy1 = ['Puppy 1', '14', '14.9', '15.2', '15.85', '17.55', '19.95', '20.5', '22.6', '24.05']
-    puppy9 = ['Puppy 9', '15.9', '16.1', '18', '19.95', '21.25', '22.1', '22.1', '24.25', '26.4']
-    assert A.five_day(short) == None
-    assert A.five_day(puppy1) == 8.2
-    assert A.five_day(puppy9) == 6.45
+def test_daily_percent_gains():
+    puppy2 = ['Puppy 2', '17.8', '18.4', '19.1', '20', '22.45', '23.3', '24', '25.2', '26.4']
+    assert A.daily_percent_gains(puppy2) == [3.37, 3.80, 4.71, 12.25, 3.79, 3.0, 5.0, 4.76]

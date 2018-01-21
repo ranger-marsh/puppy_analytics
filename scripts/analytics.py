@@ -1,6 +1,7 @@
 
 #!/usr/bin/env python3
 import csv
+import numpy as np
 
 
 def open_csv(path):
@@ -12,39 +13,25 @@ def open_csv(path):
         return list(reader)
 
 
-def one_day(puppy_list):
-    if len(puppy_list) < 3:
-        print('Not enough data for one day gains')
-        return None
-    return(round(float(puppy_list[-1]) - float(puppy_list[-2]), 2))
+def check_data(weight_list):
+    if len(weight_list) < 3:
+        print(f'{weight_list[0]} does not have enough data to proceed.')
+        return False
+    return True
 
 
-def two_day(puppy_list):
-    if len(puppy_list) < 4:
-        print('Not enough data for one day gains')
-        return None
-    return(round(float(puppy_list[-1]) - float(puppy_list[-3]), 2))
+def daily_weight_gains(weight_list):
+    weights = [float(day) for day in weight_list[1:]]
+    gains = [round(day, 2) for day in np.diff(weights)]
+    return gains
 
 
-def three_day(puppy_list):
-    if len(puppy_list) < 5:
-        print('Not enough data for one day gains')
-        return None
-    return(round(float(puppy_list[-1]) - float(puppy_list[-4]), 2))
-
-
-def four_day(puppy_list):
-    if len(puppy_list) < 6:
-        print('Not enough data for one day gains')
-        return None
-    return(round(float(puppy_list[-1]) - float(puppy_list[-5]), 2))
-
-
-def five_day(puppy_list):
-    if len(puppy_list) < 7:
-        print('Not enough data for one day gains')
-        return None
-    return(round(float(puppy_list[-1]) - float(puppy_list[-6]), 2))
+def daily_percent_gains(weight_list):
+    gains = daily_weight_gains(weight_list)
+    percentages = list()
+    for index, gain in enumerate(gains):
+        percentages.append(round((gain / float(weight_list[index + 1])) * 100, 2))
+    return percentages
 
 
 def main():
