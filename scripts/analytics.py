@@ -2,6 +2,7 @@
 #!/usr/bin/env python3
 import csv
 import numpy as np
+from operator import itemgetter
 
 
 def open_csv(path):
@@ -70,9 +71,33 @@ def projected_weight(weight_list, days_to_project):
 
 
 def expected_daily_gain(dam_weight):
-    # Expect daily gain based on 1.5G per pound of dam weight per day.
+    # Expected daily gain based on 1.5G per pound of dam weight per day.
     expected = round(dam_weight * 0.0529109, 2)  # 1.5 Grams in ounces.
     return expected
+
+
+def rank_days_to_double(litter_list):
+    ranked = list()
+    for puppy in litter_list:
+        ranked.append([puppy[0], days_to_double(puppy)])
+    ranked.sort(key=itemgetter(1), reverse=True)
+    return ranked
+
+
+def rank_average_percent_weight_gain(litter_list):
+    ranked = list()
+    for puppy in litter_list:
+        ranked.append([puppy[0], average_percent_gains(puppy)])
+    ranked.sort(key=itemgetter(1))
+    return ranked
+
+
+def rank_percent_gained_one_day(litter_list):
+    ranked = list()
+    for puppy in litter_list:
+        ranked.append([puppy[0], daily_percent_gains(puppy)[-1]])
+    ranked.sort(key=itemgetter(1))
+    return ranked
 
 
 def main():

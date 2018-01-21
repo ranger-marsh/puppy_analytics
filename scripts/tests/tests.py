@@ -82,3 +82,42 @@ def test_projected_weight():
 
 def test_expected_daily_gain():
     assert A.expected_daily_gain(65.0) == 3.44
+
+
+def test_rank_days_to_double():
+    litter = A.open_csv('testing_data/test_data.csv')
+    assert A.rank_days_to_double(litter) == [['Puppy 2', 14.47],
+                                             ['Puppy 6', 13.89],
+                                             ['Puppy 8', 10.83],
+                                             ['Puppy 9', 10.6],
+                                             ['Puppy 1', 9.72],
+                                             ['Puppy 3', 9.54],
+                                             ['Puppy 4', 9.19],
+                                             ['Puppy 7', 7.7],
+                                             ['Puppy 5', 7.67]]
+
+
+def test_rank_average_percent_weight_gain():
+    litter = A.open_csv('testing_data/test_data.csv')
+    assert A.rank_average_percent_weight_gain(litter) == [['Puppy 2', 5.83],
+                                                          ['Puppy 6', 6.03],
+                                                          ['Puppy 8', 7.42],
+                                                          ['Puppy 9', 7.59],
+                                                          ['Puppy 1', 8.1],
+                                                          ['Puppy 3', 8.27],
+                                                          ['Puppy 4', 8.46],
+                                                          ['Puppy 7', 9.72],
+                                                          ['Puppy 5', 9.78]]
+
+
+def test_rank_percent_gained_one_day():
+    litter = A.open_csv('testing_data/test_data.csv')
+    assert A.rank_percent_gained_one_day(litter) == [['Puppy 2', 4.76],
+                                                     ['Puppy 6', 5.59],
+                                                     ['Puppy 1', 6.42],
+                                                     ['Puppy 8', 8.84],
+                                                     ['Puppy 9', 8.87],
+                                                     ['Puppy 4', 10.15],
+                                                     ['Puppy 7', 10.23],
+                                                     ['Puppy 5', 15.02],
+                                                     ['Puppy 3', 16.27]]
