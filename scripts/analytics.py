@@ -59,6 +59,22 @@ def average_percent_gains(weight_list):
     return average
 
 
+def days_to_double(weight_list):
+    days = round(float(weight_list[1]) / average_daily_gains(weight_list), 2)
+    return days
+
+
+def projected_weight(weight_list, days_to_project):
+    projection = round((average_daily_gains(weight_list) * days_to_project) + float(weight_list[1]), 2)
+    return projection
+
+
+def expected_daily_gain(dam_weight):
+    # Expect daily gain based on 1.5G per pound of dam weight per day.
+    expected = round(dam_weight * 0.0529109, 2)  # 1.5 Grams in ounces.
+    return expected
+
+
 def main():
     pass
 
